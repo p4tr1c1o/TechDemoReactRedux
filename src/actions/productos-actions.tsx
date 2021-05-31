@@ -1,4 +1,4 @@
-import { Producto } from '../domain/producto-model';
+import Producto from '../domain/producto-model';
 import { SET_PRODUCTOS, ADD_PRODUCTO, EDIT_PRODUCTO, REMOVE_PRODUCTO } from '../reducers/productos-reducer';
 
 

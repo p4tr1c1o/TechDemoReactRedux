@@ -1,4 +1,4 @@
-import { Producto } from '../domain/producto-model'
+import Producto from '../domain/producto-model'
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { RootState, } from '../store';
 

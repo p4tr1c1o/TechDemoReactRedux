@@ -4,7 +4,7 @@ import { Form, Formik } from 'formik'
 import { TextField } from 'formik-material-ui'
 import { Box } from '@material-ui/core'
 import { Field } from 'formik'
-import { Producto } from '../../../domain/producto-model'
+import Producto from '../../../domain/producto-model'
 import './producto-formulario.css';
 
 type FormProps = {

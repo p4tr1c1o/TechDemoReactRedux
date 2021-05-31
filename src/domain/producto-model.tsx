@@ -1,4 +1,4 @@
-export class Producto {
+class Producto {
     productoId: number;
     nombre: string;
     descripcion: string;
@@ -8,3 +8,5 @@ export class Producto {
         Object.assign(this, init);
     }
 }
+
+export default Producto;
