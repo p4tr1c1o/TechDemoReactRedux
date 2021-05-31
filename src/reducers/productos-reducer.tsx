@@ -17,7 +17,7 @@ const productosSlice = createSlice({
     initialState,
     reducers: {
         PROCESANDO: (state: ProductosState) => {
-            state.procesando = true
+            state.procesando = true;
         },
         SET_PRODUCTOS: (state: ProductosState, action: PayloadAction<Producto[]>) => {
             state.procesando = false;

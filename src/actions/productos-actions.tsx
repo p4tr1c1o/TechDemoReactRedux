@@ -1,5 +1,6 @@
 import Producto from '../domain/producto-model';
 import { SET_PRODUCTOS, ADD_PRODUCTO, EDIT_PRODUCTO, REMOVE_PRODUCTO } from '../reducers/productos-reducer';
+import { ERROR, SUCCESS } from '../reducers/snackbar-reducer';
 
 
 export function getProductos() {
@@ -26,13 +27,12 @@ export function createProducto(producto: Producto) {
             .then(response => response.json())
             .then(result => {
                 dispatch(ADD_PRODUCTO(result.producto));
+                dispatch(SUCCESS("Producto Creado"));
             });
     };
 }
 
 export function updateProducto(producto: Producto) {
-    console.log("producto");
-    console.log(producto);
 
     return dispatch => {
         fetch('http://localhost:5000/productos', {
@@ -45,6 +45,7 @@ export function updateProducto(producto: Producto) {
             .then(result => {
                 // console.log(data);
                 dispatch(EDIT_PRODUCTO(result.producto));
+                dispatch(SUCCESS("Cambios Guardados"));
             });
     };
 }
@@ -58,8 +59,14 @@ export function deleteProducto(producto: Producto) {
         })
             .then(handleErrors)
             .then(response => response.json())
-            .then(dispatch(REMOVE_PRODUCTO(producto)))
-            .catch(e => console.error(e));
+            .then(() => {
+                dispatch(REMOVE_PRODUCTO(producto));
+                dispatch(SUCCESS("Producto Eliminado"));
+            })
+            .catch(e => {
+                dispatch(ERROR(e.message));
+                console.error(e);
+            });
     };
 }
 

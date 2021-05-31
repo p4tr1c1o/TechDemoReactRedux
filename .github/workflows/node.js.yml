@@ -5,13 +5,12 @@ name: Build & Deploy
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     strategy:
@@ -20,10 +19,20 @@ jobs:
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v2
-      with:
-        node-version: ${{ matrix.node-version }}
-    - run: npm ci
-    - run: npm run build
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: npm ci
+      - run: npm run build
+    # - name: Beanstalk Deploy
+    #   uses: einaregilsson/beanstalk-deploy@v17
+    #   with:
+    #     aws_access_key: ${{secrets.AWS_ACCESS_KEY_ID}}
+    #     aws_secret_key: ${{secrets.AWS_SECRET_ACCESS_KEY}}
+    #     region: "sa-east-1"
+    #     application_name: "mox-tech-demo"
+    #     environment_name: "Moxtechdemo-env"
+    #     version_label: "mox-tech-demo-new-${{ github.run_id }}"
+    #     deployment_package: deploy.zip

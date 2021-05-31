@@ -1,9 +1,11 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
+import snackbarReducer from './reducers/snackbar-reducer';
 import productosReducer from './reducers/productos-reducer';
 
 
 export const store = configureStore({
     reducer: {
+        snackbar: snackbarReducer,
         productos: productosReducer,
     },
 });

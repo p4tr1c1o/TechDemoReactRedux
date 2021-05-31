@@ -14,7 +14,8 @@ import Producto from '../../../domain/producto-model';
 
 export const ProductosGestion = () => {
     const dispatch = useAppDispatch();
-    const [open, setOpen] = useState(false);
+    const [openDialog, setOpenDialog] = useState(false);
+    const [openSnack, setOpenSnack] = useState(false);
     const [model, setModel] = useState(new Producto());
     const productos = useAppSelector(state => state.productos.allProductos);
     const loading = useAppSelector(state => state.productos.procesando)
@@ -35,7 +36,7 @@ export const ProductosGestion = () => {
 
     function onNuevo() {
         setModel(new Producto());
-        setOpen(true);
+        setOpenDialog(true);
     };
 
     function onDelete(model) {
@@ -44,22 +45,22 @@ export const ProductosGestion = () => {
 
     function onEdit(row: Producto) {
         setModel(row);
-        setOpen(true);
+        setOpenDialog(true);
     }
 
     function onGuardar(model: Producto) {
-        console.log(model);
         if (model.id) {
             dispatch(updateProducto(model));
         }
         else {
             dispatch(createProducto(model));
         }
-        setOpen(false);
+        setOpenDialog(false);
+        setOpenSnack(true);
     };
 
     function onCancelar() {
-        setOpen(false);
+        setOpenDialog(false);
     };
 
     if (loading) return (<CircularProgress />)
@@ -73,7 +74,7 @@ export const ProductosGestion = () => {
                 <DataGrid rows={productos} columns={columns} pageSize={8} />
             </Card>
 
-            <ProductoFormulario open={open} model={model} onCancelar={onCancelar} onGuardar={onGuardar} />
+            <ProductoFormulario open={openDialog} model={model} onCancelar={onCancelar} onGuardar={onGuardar} />
         </section >
     )
 }
@@ -96,5 +97,6 @@ function buildBotonesGrilla(onEdit: Function, onDelete: Function) {
         );
     };
 }
+
 
 export default ProductosGestion;
