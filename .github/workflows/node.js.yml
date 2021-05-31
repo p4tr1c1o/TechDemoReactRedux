@@ -12,6 +12,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      CI: false
 
     strategy:
       matrix:
@@ -26,13 +28,12 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - run: npm ci
       - run: npm run build
-    # - name: Beanstalk Deploy
-    #   uses: einaregilsson/beanstalk-deploy@v17
-    #   with:
-    #     aws_access_key: ${{secrets.AWS_ACCESS_KEY_ID}}
-    #     aws_secret_key: ${{secrets.AWS_SECRET_ACCESS_KEY}}
-    #     region: "sa-east-1"
-    #     application_name: "mox-tech-demo"
-    #     environment_name: "Moxtechdemo-env"
-    #     version_label: "mox-tech-demo-new-${{ github.run_id }}"
-    #     deployment_package: deploy.zip
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: sa-east-1
+      - name: Deploy static site to S3 bucket
+        run: aws s3 sync ./build/ s3://mox-tech-demo --delete
