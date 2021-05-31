@@ -30,11 +30,11 @@ const productosSlice = createSlice({
         EDIT_PRODUCTO: (state, action) => {
             state.procesando = false;
             state.allProductos = state.allProductos
-                .map(producto => (producto.id == action.payload.id) ? action.payload : producto)
+                .map(producto => (producto.id === action.payload.id) ? action.payload : producto)
         },
         REMOVE_PRODUCTO: (state, action: PayloadAction<Producto>) => {
             state.procesando = false;
-            state.allProductos = state.allProductos.filter(p => p.id != action.payload.id)
+            state.allProductos = state.allProductos.filter(p => p.id !== action.payload.id)
         },
     }
 });
