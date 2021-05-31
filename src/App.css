@@ -1,0 +1,7 @@
+main {
+    display: flex;
+    flex-direction: column;
+}
+.papel {
+    height: 100vh;
+}

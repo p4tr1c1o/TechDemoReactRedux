@@ -1,0 +1,16 @@
+section {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    align-items: stretch;
+    padding-left: 3rem;
+    padding-right: 3rem;
+}
+
+.row-end {
+    padding: 1rem;
+}
+
+.card-grid {
+    height: 60vh;
+}
