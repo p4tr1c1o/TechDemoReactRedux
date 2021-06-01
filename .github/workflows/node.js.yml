@@ -28,9 +28,9 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - run: npm ci
       - run: npm run build
-      
+      - run: mv build publish/www
       - name: Zip
-        run: cd build && zip -r "../deploy.zip" .
+        run: cd publish/www && zip -r "../deploy.zip" .
 
       - name: Beanstalk Deploy
         uses: einaregilsson/beanstalk-deploy@v17
