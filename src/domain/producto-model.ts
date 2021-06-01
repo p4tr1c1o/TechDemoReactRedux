@@ -1,12 +1,12 @@
-class Producto {
+export class Producto {
     productoId: number;
     nombre: string;
     descripcion: string;
     id: number;
 
-    Producto(init?: Partial<Producto>) {
+    constructor(init?: Partial<Producto>) {
         Object.assign(this, init);
     }
 }
 
-export default Producto;
+export default Producto

@@ -9,14 +9,18 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import Button from '@material-ui/core/Button';
 import ProductoFormulario from '../producto-formulario/producto-formulario';
-import Producto from '../../../domain/producto-model';
+import { Producto } from '../../../domain/producto-model';
+
 
 
 export const ProductosGestion = () => {
     const dispatch = useAppDispatch();
     const [openDialog, setOpenDialog] = useState(false);
-    const [openSnack, setOpenSnack] = useState(false);
-    const [model, setModel] = useState(new Producto());
+    const prod = new Producto();
+
+    console.log("producto1");
+
+    const [model, setModel] = useState<Producto>(prod);
     const productos = useAppSelector(state => state.productos.allProductos);
     const loading = useAppSelector(state => state.productos.procesando)
     const columns: GridColDef[] = [
@@ -56,7 +60,6 @@ export const ProductosGestion = () => {
             dispatch(createProducto(model));
         }
         setOpenDialog(false);
-        setOpenSnack(true);
     };
 
     function onCancelar() {

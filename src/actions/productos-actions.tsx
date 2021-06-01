@@ -1,3 +1,4 @@
+import { getApiURL } from '../App';
 import Producto from '../domain/producto-model';
 import { SET_PRODUCTOS, ADD_PRODUCTO, EDIT_PRODUCTO, REMOVE_PRODUCTO } from '../reducers/productos-reducer';
 import { ERROR, SUCCESS } from '../reducers/snackbar-reducer';
@@ -6,7 +7,7 @@ import { ERROR, SUCCESS } from '../reducers/snackbar-reducer';
 export function getProductos() {
     return dispatch => {
         // fetch("https://jsonplaceholder.typicode.com/posts")
-        fetch('http://localhost:5000/productos', { method: "GET" })
+        fetch(`http://${getApiURL()}/productos`, { method: "GET" })
             .then(handleErrors)
             .then(response => response.json())
             .then(data => {
@@ -18,7 +19,7 @@ export function getProductos() {
 
 export function createProducto(producto: Producto) {
     return dispatch => {
-        fetch('http://localhost:5000/productos', {
+        fetch(`http://${getApiURL()}/productos`, {
             method: "POST",
             headers: { 'content-type': 'application/json' },
             body: JSON.stringify(producto)
@@ -35,7 +36,7 @@ export function createProducto(producto: Producto) {
 export function updateProducto(producto: Producto) {
 
     return dispatch => {
-        fetch('http://localhost:5000/productos', {
+        fetch(`http://${getApiURL()}/productos`, {
             method: "PUT",
             headers: { 'content-type': 'application/json' },
             body: JSON.stringify(producto)
@@ -52,7 +53,7 @@ export function updateProducto(producto: Producto) {
 
 export function deleteProducto(producto: Producto) {
     return dispatch => {
-        fetch('http://localhost:5000/productos', {
+        fetch(`http://${getApiURL()}/productos`, {
             method: "DELETE",
             headers: { 'content-type': 'application/json' },
             body: JSON.stringify({ id: producto.id })

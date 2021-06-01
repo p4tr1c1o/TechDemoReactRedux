@@ -8,7 +8,6 @@ import { Snackbar } from '@material-ui/core';
 import { CLEAR } from './reducers/snackbar-reducer';
 
 export const App = () => {
-    const { REACT_APP_ENV } = process.env;
     const dispatch = useAppDispatch();
     const { message, showMessage, severity } = useAppSelector(state => state.snackbar);
 
@@ -36,6 +35,16 @@ export const App = () => {
         </ main>
 
     );
+
+}
+
+export const getApiURL = () => {
+    const { REACT_APP_ENV } = process.env;
+    if (REACT_APP_ENV?.toLowerCase() === "development") {
+        return "localhost:5000";
+    } else {
+        return "moxtechdemo.sa-east-1.elasticbeanstalk.com";
+    }
 
 }
 
