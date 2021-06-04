@@ -4,8 +4,10 @@ import ProductosGestion from './components/productos/productos-gestion/productos
 import './App.css';
 import { useAppDispatch, useAppSelector } from './hooks'
 import { Paper } from '@material-ui/core';
-import { Snackbar } from '@material-ui/core';
+import { Snackbar, AppBar, Toolbar, IconButton, Typography, Button } from '@material-ui/core';
+import MenuIcon from '@material-ui/icons/Menu';
 import { CLEAR } from './reducers/snackbar-reducer';
+
 
 export const App = () => {
     const dispatch = useAppDispatch();
@@ -19,10 +21,19 @@ export const App = () => {
 
         <main>
             <Paper className="papel">
+                <AppBar position="static">
+                    <Toolbar className="row-space-between">
+                        <div className="row">
+                            <IconButton edge="start" aria-label="menu" color="inherit">
+                                <MenuIcon />
+                            </IconButton>
+                            <Typography variant="h6"> Productos </Typography>
+                        </div>
+                        <Typography variant="h6">{process.env.NODE_ENV}</Typography>
+                    </Toolbar>
+                </AppBar>
 
-                <header>
-                    <h1>ENV:{process.env.NODE_ENV}</h1>
-                </header>
+                {/* Routing */}
                 <ProductosGestion />
 
                 <Snackbar open={showMessage} autoHideDuration={6000} onClose={onClose}>
@@ -32,7 +43,7 @@ export const App = () => {
                 </Snackbar>
 
             </Paper>
-        </ main>
+        </ main >
 
     );
 

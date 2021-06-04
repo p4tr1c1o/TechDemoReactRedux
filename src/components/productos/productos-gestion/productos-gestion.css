@@ -14,3 +14,10 @@ section {
 .card-grid {
     height: 60vh;
 }
+
+.center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: calc(100% - 64px);
+}

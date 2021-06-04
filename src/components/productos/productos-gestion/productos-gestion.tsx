@@ -66,12 +66,16 @@ export const ProductosGestion = () => {
         setOpenDialog(false);
     };
 
-    if (loading) return (<CircularProgress />)
+    if (loading) return (
+        <div className="center">
+            <CircularProgress />
+        </div>
+    )
 
     return (
         <section>
             <div className="row-end">
-                <Button variant="outlined" color="primary" onClick={onNuevo}>+ Nuevo Producto</Button>
+                <Button variant="contained" color="secondary" onClick={onNuevo}>+ Nuevo Producto</Button>
             </div>
             <Card className="card-grid">
                 <DataGrid rows={productos} columns={columns} pageSize={8} />
