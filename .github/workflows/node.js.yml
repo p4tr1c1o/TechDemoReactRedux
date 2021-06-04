@@ -28,7 +28,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - run: npm ci
       - run: npm run build
-      - run: mv build publish/www
+      - run: rm -fr ./publish/www/ && mv -f build ./publish/www
       - name: Zip
         run: cd publish && zip -r "../deploy.zip" .
 
